@@ -26,7 +26,7 @@ O projeto está dividido em duas pastas principais. Cada pasta contém seu próp
 
 * **Descrição:** API RESTful construída em Java com Spring Boot. É responsável pela lógica de negócio, segurança (JWT) e comunicação com o banco de dados (MariaDB).
 * **Pasta:** `./backend/`
-* **Para ver detalhes, clique aqui:** ➡️ **[README do Backend](./backend/README.md)**
+* **Para ver detalhes, clique aqui:** ➡️ **[README do Backend](./backend/sistema-agendamento-backend/README.md)**
 
 ## 🛠️ Stack Principal
 
