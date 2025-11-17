@@ -1,0 +1,120 @@
+
+
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  color: #5a6a85;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 40px;
+  color: #777;
+}
+
+
+.calendario-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+
+.calendar-wrapper-card {
+  padding: 8px;
+
+  
+  app-calendar {
+    width: 100%;
+  }
+}
+
+
+.details-wrapper-card {
+  
+  min-height: 400px;
+}
+
+.empty-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+  color: #777;
+  height: 100%;
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: #ccc;
+    margin-bottom: 16px;
+  }
+}
+
+.aulas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.aula-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border: 1px solid #eee;
+  box-shadow: none !important; 
+
+  .aula-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .aula-nome {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .aula-horario {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #5a6a85;
+    font-size: 0.9rem;
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  .cancel-button {
+    height: 40px;
+    border-radius: 20px;
+    font-weight: 600;
+
+    mat-icon {
+      margin-right: 4px;
+    }
+  }
+}
+
+
+@media (min-width: 992px) {
+  .calendario-grid {
+    
+    grid-template-columns: 40% 1fr;
+  }
+}

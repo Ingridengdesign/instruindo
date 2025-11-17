@@ -1,0 +1,38 @@
+:root{
+  --white: #ffffff !important;
+  --black: #000000 !important;
+  --main: #99CCFF !important;
+  --main-2: #4D6680 !important;
+  --main-3: #7399BF !important;
+  --main-4: #263340 !important;
+  --main-5: #808080 !important;
+  --theme-light-1: #85AED2 !important;
+  --theme-light-2: #9EC0E1 !important;
+  --theme-light-3: #B6D1EC !important;
+  --theme-light-4: #CEE2F5 !important;
+  --theme-light-5: #E4F0FB !important;
+  --theme-dark-1: #11283E !important;
+  --theme-dark-2: #141E28 !important;
+  --theme-dark-3: #152636 !important;
+  --theme-dark-4: #212F3D !important;
+  --theme-dark-5: #2E4153 !important;
+  --yellow-1: #806F15 !important;
+  --yellow-2: #AA9839 !important;
+  --yellow-3: #FFE34E !important;
+  --yellow-4: #FFE558 !important;
+  --yellow-5: #FFEF9A !important;
+  --red-1: #550600 !important;
+  --red-2: #801D15 !important;
+  --red-3: #D4726A !important;
+  --red-4: #FF6054 !important;
+  --red-5: #FFB0AA !important;
+  --purple-1: #704B80 !important;
+  --purple-2: #A871BF !important;
+  --purple-3: #C987E6 !important;
+  --purple-4: #DF96FF !important;
+  --purple-5: #EFCAFF !important;
+}
+
+@import './colors.css';
+@import './background.css'
+

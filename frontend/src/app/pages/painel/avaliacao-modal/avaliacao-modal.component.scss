@@ -1,0 +1,32 @@
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.estrelas-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+
+  mat-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    color: #FFC107; 
+    cursor: pointer;
+  }
+}
+
+.modal-loading {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}

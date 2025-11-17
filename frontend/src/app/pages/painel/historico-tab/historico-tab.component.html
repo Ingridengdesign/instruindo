@@ -1,0 +1,55 @@
+<h1>Histórico de Aulas</h1>
+<p class="page-subtitle">Veja suas aulas concluídas e deixe sua avaliação.</p>
+
+<div *ngIf="isLoadingHistorico" class="loading-container">
+  <mat-spinner diameter="50"></mat-spinner>
+  <p>A carregar histórico de aulas...</p>
+</div>
+
+<div *ngIf="!isLoadingHistorico && historicoAulas.length === 0" class="empty-state">
+  <mat-icon>history_toggle_off</mat-icon>
+  <p>Nenhuma aula concluída encontrada no seu histórico.</p>
+</div>
+
+<div class="historico-list-container" *ngIf="!isLoadingHistorico && historicoAulas.length > 0">
+
+  <mat-card class="historico-card" *ngFor="let aula of historicoAulas">
+
+    <div class="info-section">
+      <div class="icon-wrapper">
+        <mat-icon>history</mat-icon>
+      </div>
+      <div class="info-text">
+        <span class="titulo">{{ aula.tituloAula || 'Aula Concluída' }}</span>
+        <span class="participante">
+          {{ userRole === 'ROLE_PROFESSOR' ? aula.nomeAluno : aula.nomeProfessor }}
+        </span>
+        <span class="data">{{ aula.dataHoraAula | date:'dd/MM/yyyy' }}</span>
+
+        <a *ngIf="aula.localAula" [href]="aula.localAula" target="_blank" rel="noopener noreferrer" class="link-aula">
+          <mat-icon>link</mat-icon> Ver local da aula
+        </a>
+      </div>
+    </div>
+
+    <div class="acao-historico">
+
+      <button *ngIf="!aula.avaliacaoAluno && !aula.avaliacaoProfessor" mat-flat-button color="primary"
+        (click)="abrirModalAvaliacao(aula)">
+        <mat-icon>star_outline</mat-icon> Avaliar
+      </button>
+
+      <div *ngIf="aula.avaliacaoAluno" class="avaliacao-feita">
+        <span class="label">Aluno</span>
+        <span class="nota"><mat-icon>star</mat-icon> {{ aula.avaliacaoAluno.nota }} / 5</span>
+      </div>
+
+      <div *ngIf="aula.avaliacaoProfessor" class="avaliacao-feita">
+        <span class="label">Professor</span>
+        <span class="nota"><mat-icon>star</mat-icon> {{ aula.avaliacaoProfessor.nota }} / 5</span>
+      </div>
+
+    </div>
+
+  </mat-card>
+</div>

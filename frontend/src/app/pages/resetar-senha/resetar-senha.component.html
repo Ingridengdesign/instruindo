@@ -1,0 +1,62 @@
+<app-header></app-header>
+
+<div class="auth-page-container">
+  <mat-card class="auth-card">
+    <mat-card-title>Redefinir Senha</mat-card-title>
+
+    <mat-card-content>
+
+      <div *ngIf="mensagemSucesso" class="auth-success">
+        <mat-icon>check_circle</mat-icon>
+        <h3>{{ mensagemSucesso }}</h3>
+        <p>A sua senha foi alterada. Você será redirecionado para o login...</p>
+        <a mat-stroked-button routerLink="/login" style="margin-top: 16px;">Ir para o Login Agora</a>
+      </div>
+
+      <form *ngIf="!mensagemSucesso" [formGroup]="resetForm" (ngSubmit)="enviarNovaSenha()">
+
+        <p>Por favor, insira a sua nova senha.</p>
+
+        <div *ngIf="mensagemErro" class="auth-error">
+          <p>{{ mensagemErro }}</p>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nova Senha</mat-label>
+          <input matInput formControlName="novaSenha" [type]="hidePassword ? 'password' : 'text'"
+            placeholder="Mínimo 6 caracteres">
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="novaSenha?.errors?.['required']">
+            A nova senha é obrigatória.
+          </mat-error>
+          <mat-error *ngIf="novaSenha?.errors?.['minlength']">
+            A senha deve ter pelo menos 6 caracteres.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Confirmar Nova Senha</mat-label>
+          <input matInput formControlName="confirmarSenha" [type]="hidePassword ? 'password' : 'text'">
+          <mat-error *ngIf="confirmarSenha?.errors?.['required']">
+            A confirmação é obrigatória.
+          </mat-error>
+          <mat-error *ngIf="resetForm.errors?.['passwordMismatch'] && confirmarSenha?.touched">
+            As senhas não coincidem.
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="resetForm.invalid || !token || isLoading"
+          class="auth-button">
+          <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+          <span *ngIf="!isLoading">Salvar Nova Senha</span>
+        </button>
+
+      </form>
+    </mat-card-content>
+
+  </mat-card>
+</div>
+
+<app-footer></app-footer>

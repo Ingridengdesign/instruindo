@@ -1,0 +1,117 @@
+
+
+
+.modal-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  min-height: 300px;
+}
+
+
+h2[mat-dialog-title] {
+  font-size: 1.75rem; 
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+
+.modal-form-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  padding-bottom: 16px;
+
+  p {
+    margin: 0 0 8px 0;
+    color: #5a6a85;
+  }
+}
+
+
+.modal-summary-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: #f0f6ff; 
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.summary-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+.summary-details {
+  .nome {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #212529;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 12px;
+    font-size: 0.9rem;
+    color: #5a6a85;
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    mat-icon {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+      color: #ffb400; 
+    }
+  }
+}
+
+
+mat-form-field {
+  width: 100%;
+}
+
+
+mat-option[disabled] mat-spinner {
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+mat-checkbox {
+  font-size: 0.9rem;
+
+  a {
+    text-decoration: none;
+    font-weight: 600;
+  }
+}
+
+
+mat-dialog-actions {
+  padding: 16px 24px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.modal-termos-checkbox {
+  padding: 0 24px 16px 24px; 
+  font-size: 0.85rem; 
+}

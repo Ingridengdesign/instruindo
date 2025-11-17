@@ -1,0 +1,26 @@
+
+
+:host {
+
+  display: block;
+  width: 100%;
+}
+
+.card-calendar {
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+
+  width: 100%;
+  height: auto !important;
+  box-shadow: none !important;
+  border: none !important;
+  background-color: transparent !important;
+}
+
+mat-calendar {
+
+  width: 100% !important;
+  height: auto !important;
+}

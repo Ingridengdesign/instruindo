@@ -1,0 +1,251 @@
+
+
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  color: #5a6a85;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.loading-container,
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #777;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.empty-state mat-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+  color: #ccc;
+  margin-bottom: 16px;
+}
+
+
+.pedidos-list-container {
+  display: flex;
+  flex-direction: column; 
+  gap: 16px;
+
+  
+  max-width: 960px;
+  margin: 0 auto; 
+}
+
+.pedido-card {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0;
+  padding: 16px;
+}
+
+
+.card-top-row {
+  display: flex;
+  flex-wrap: wrap; 
+  align-items: center;
+  justify-content: flex-start; 
+  gap: 16px 24px; 
+}
+
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-grow: 1; 
+  flex-shrink: 0;
+
+  .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #d6e8ff;
+    color: #3f51b5;
+    font-weight: 600;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+    
+
+    
+
+    .name-status {
+      display: flex;
+      
+
+      
+      flex-direction: row; 
+      align-items: center; 
+      gap: 8px; 
+
+      .nome {
+        font-weight: 600;
+        font-size: 1.1rem;
+      }
+
+      .status-chip {
+        height: 24px;
+        padding: 0 10px;
+        font-size: 0.8rem;
+        border-radius: 16px;
+        color: #333;
+        font-weight: 600;
+        
+
+        
+        &.status-pendente {
+          background-color: #ffedb3 !important;
+        }
+
+        &.status-aceita {
+          background-color: #d1ffef !important;
+        }
+
+        &.status-recusada {
+          background-color: #ffd1d1 !important;
+        }
+      }
+    }
+
+    
+}
+
+
+.details-section {
+  display: flex;
+  gap: 8px 16px;
+  color: #5a6a85;
+  font-size: 0.9rem;
+
+  .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+
+.actions-section {
+  display: flex;
+  gap: 12px;
+  margin-left: auto; 
+  flex-shrink: 0;
+
+  button {
+    height: 40px;
+    border-radius: 20px;
+    padding: 0 16px;
+    font-weight: 600;
+
+    mat-icon {
+      margin-right: 4px;
+    }
+  }
+
+  .accept-button {
+    background-color: #e0ffe0;
+    color: #388e3c;
+
+    &:hover {
+      background-color: #c8e6c9;
+    }
+  }
+
+  .reject-button {
+    background-color: #ffe0e0;
+    color: #d32f2f;
+
+    &:hover {
+      background-color: #ffcdd2;
+    }
+  }
+}
+
+.card-bottom-row {
+  padding: 16px 0 0 0;
+  border-top: 1px solid #eee;
+  margin-top: 16px;
+
+  p {
+    margin: 0;
+    line-height: 1.5;
+    color: #333;
+  }
+}
+
+.local-aula-container {
+  
+  border-top: 1px dashed #ddd;
+  padding-top: 12px;
+  margin-top: 12px;
+  font-size: 0.9rem;
+
+  
+  p+& {
+    
+    border-top: 1px dashed #ddd;
+    margin-top: 12px;
+  }
+
+  *:first-child:not(p)+& {
+    
+    border-top: none;
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  strong {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  a {
+    color: #3f51b5;
+    text-decoration: none;
+    font-weight: 500;
+    word-break: break-all; 
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+@media (min-width: 768px) {
+  .pedidos-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pedidos-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}

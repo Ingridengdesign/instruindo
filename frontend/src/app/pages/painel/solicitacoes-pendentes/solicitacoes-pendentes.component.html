@@ -1,0 +1,61 @@
+<h1 *ngIf="userRole === 'ROLE_PROFESSOR'">Pedidos de Aula</h1>
+<h1 *ngIf="userRole === 'ROLE_ALUNO'">Minhas Solicitações</h1>
+<p class="page-subtitle">
+  {{ userRole === 'ROLE_PROFESSOR' ? 'Responda as solicitações pendentes de seus alunos.' : 'Acompanhe o status de suas
+  solicitações de aula.' }}
+</p>
+
+<div *ngIf="isLoadingSolicitacoes" class="loading-container">
+</div>
+<div *ngIf="!isLoadingSolicitacoes && solicitacoes.length === 0" class="empty-state">
+</div>
+
+<div class="pedidos-list-container" *ngIf="!isLoadingSolicitacoes && solicitacoes.length > 0">
+
+  <mat-card class="pedido-card" *ngFor="let sol of solicitacoes">
+
+    <div class="card-top-row">
+      <div class="profile-section">
+        <div class="avatar">{{ getInitials(userRole === 'ROLE_PROFESSOR' ? sol.nomeAluno : sol.nomeProfessor) }}</div>
+        <div class="name-status">
+          <span class="nome">{{ userRole === 'ROLE_PROFESSOR' ? sol.nomeAluno : sol.nomeProfessor }}</span>
+          <mat-chip *ngIf="userRole === 'ROLE_ALUNO' || sol.status === 'PENDENTE'" [class]="getChipClass(sol.status)">
+            {{ sol.status }}
+          </mat-chip>
+        </div>
+      </div>
+
+      <div class="details-section">
+        <span class="detail-item">
+          <mat-icon>calendar_month</mat-icon>
+          {{ sol.dataSolicitacao | date:'dd/MM/yyyy' }}
+        </span>
+        <span class="detail-item">
+          <mat-icon>schedule</mat-icon>
+          {{ sol.dataSolicitacao | date:'HH:mm' }}
+        </span>
+      </div>
+
+      <div class="actions-section" *ngIf="userRole === 'ROLE_PROFESSOR'">
+        <button mat-flat-button class="reject-button" (click)="onResponder(sol.idSolicitacao, 'RECUSAR')">
+          <mat-icon>close</mat-icon> Recusar
+        </button>
+        <button mat-flat-button class="accept-button" (click)="onResponder(sol.idSolicitacao, 'ACEITAR')">
+          <mat-icon>check</mat-icon> Aceitar
+        </button>
+      </div>
+    </div>
+
+    <mat-card-content class="card-bottom-row" *ngIf="sol.detalhes || (sol.status === 'ACEITA' && sol.localAula)">
+
+      <p *ngIf="sol.detalhes">{{ sol.detalhes }}</p>
+
+      <div *ngIf="sol.status === 'ACEITA' && sol.localAula" class="local-aula-container">
+        <strong><mat-icon>link</mat-icon> Local da Aula (Resposta):</strong>
+        <a [href]="sol.localAula" target="_blank" rel="noopener noreferrer">{{ sol.localAula }}</a>
+      </div>
+
+    </mat-card-content>
+
+  </mat-card>
+</div>

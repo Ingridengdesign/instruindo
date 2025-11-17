@@ -1,0 +1,48 @@
+<app-header></app-header>
+
+<div class="auth-page-container">
+  <mat-card class="auth-card">
+    <mat-card-title>Recuperar Senha</mat-card-title>
+
+    <mat-card-content>
+
+      <div *ngIf="mensagemSucesso" class="auth-success">
+        <mat-icon>check_circle</mat-icon>
+        <h3>{{ mensagemSucesso }}</h3>
+        <p>Por favor, verifique a sua caixa de entrada (e spam).</p>
+      </div>
+
+      <form *ngIf="!mensagemSucesso" [formGroup]="resetForm" (ngSubmit)="enviarSolicitacao()">
+
+        <p>Por favor, insira o seu email. Enviaremos um link para redefinir a sua senha.</p>
+
+        <div *ngIf="mensagemErro" class="auth-error">
+          <p>{{ mensagemErro }}</p>
+        </div>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="seu@email.com">
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+            Por favor, insira um email válido.
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="resetForm.invalid || isLoading"
+          class="auth-button">
+          <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+          <span *ngIf="!isLoading">Enviar</span>
+        </button>
+
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions class="auth-actions">
+      <a mat-button routerLink="/login">Voltar para o Login</a>
+    </mat-card-actions>
+
+  </mat-card>
+</div>
+
+<app-footer></app-footer>

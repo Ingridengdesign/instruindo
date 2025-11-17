@@ -1,0 +1,75 @@
+<app-header></app-header>
+
+<main class="search-page">
+  <div class="container">
+
+    <!-- ========================
+         SEÇÃO 1: FILTROS
+    ========================= -->
+    <form class="filter-bar" [formGroup]="filtroForm" (ngSubmit)="buscar()">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Categoria</mat-label>
+        <mat-select formControlName="idCategoria">
+          <mat-option [value]="null">Todas</mat-option>
+
+          <!--
+            *** A CORREÇÃO ESTÁ AQUI ***
+            Antes: [value]="cat.id"
+            Agora: [value]="cat.idCategoria"
+          -->
+          <mat-option *ngFor="let cat of categorias" [value]="cat.idCategoria">
+            {{cat.nome}}
+          </mat-option>
+
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Preço Máximo (R$)</mat-label>
+        <input matInput type="number" formControlName="precoMax" placeholder="Ex: 150">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Avaliação Mínima</mat-label>
+        <mat-select formControlName="notaMin">
+          <mat-option [value]="null">Qualquer</mat-option>
+          <mat-option [value]="3">3 estrelas ou mais</mat-option>
+          <mat-option [value]="4">4 estrelas ou mais</mat-option>
+          <mat-option [value]="5">5 estrelas</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Aplicar</button>
+
+    </form>
+
+    <!-- ========================
+         SEÇÃO 2: RESULTADOS
+    ========================= -->
+    <section class="results-section">
+
+      <h1>Professores disponíveis</h1>
+      <p class="results-count">{{ length }} professores encontrados</p>
+
+      <div class="results-grid">
+        <app-card-display *ngFor="let prof of professoresPaginados" [professor]="prof"
+          (solicitarAula)="openDialog(prof.idProfessor)">
+        </app-card-display>
+      </div>
+
+      <div *ngIf="!professoresPaginados.length" class="no-results">
+        <mat-icon>search_off</mat-icon>
+        <p>Nenhum professor encontrado com esses filtros.</p>
+      </div>
+
+      <mat-paginator *ngIf="length > pageSize" class="results-paginator" (page)="handlePageEvent($event)"
+        [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+        [showFirstLastButtons]="showFirstLastButtons" [pageIndex]="pageIndex">
+      </mat-paginator>
+
+    </section>
+  </div>
+</main>
+
+<app-footer></app-footer>

@@ -1,0 +1,104 @@
+<!-- (NÃO TEM MAIS <app-header> AQUI) -->
+
+<!-- 1. O Container do Sidenav (Cobre 100% da tela) -->
+<mat-sidenav-container class="painel-container">
+
+  <!-- ========================
+       A SIDEBAR (AGORA É UM MAT-SIDENAV)
+  ========================= -->
+  <mat-sidenav #sidenav class="painel-sidebar" [mode]="(isMobile$ | async) ? 'over' : 'side'"
+    [opened]="!(isMobile$ | async)">
+
+    <!-- (Todo o seu conteúdo de <nav> anterior vai aqui) -->
+
+    <!-- Perfil no Topo (Dinâmico) -->
+    <div class="sidebar-profile">
+      <div class="avatar">
+        <img *ngIf="getProfessorImageUrl()" [src]="getProfessorImageUrl()" alt="Foto de Perfil">
+        <span *ngIf="!getProfessorImageUrl()">{{ userInitials }}</span>
+      </div>
+      <span class="nome">{{ userName }}</span>
+      <span class="role">{{ userRole === 'ROLE_PROFESSOR' ? 'Instrutor' : 'Aluno' }}</span>
+    </div>
+
+    <!-- Links de Navegação -->
+    <!--
+      *** A CORREÇÃO ESTÁ AQUI ***
+      (click) agora chama a função onNavLinkClick() do .ts
+    -->
+    <mat-nav-list (click)="onNavLinkClick()">
+      <a mat-list-item routerLink="inicio" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon>home</mat-icon> Início
+      </a>
+      <a mat-list-item routerLink="informacoes" routerLinkActive="active-link">
+        <mat-icon>person</mat-icon> Informações
+      </a>
+
+      <!-- (Links de Professor) -->
+      <ng-container *ngIf="userRole === 'ROLE_PROFESSOR'">
+        <mat-divider></mat-divider>
+        <a mat-list-item routerLink="pedidos" routerLinkActive="active-link">
+          <mat-icon>inbox</mat-icon> Pedidos de Aula
+        </a>
+        <a mat-list-item routerLink="gestao-agenda" routerLinkActive="active-link">
+          <mat-icon>edit_calendar</mat-icon> Gerenciar Horários
+        </a>
+        <a mat-list-item routerLink="calendario" routerLinkActive="active-link">
+          <mat-icon>calendar_month</mat-icon> Calendário de Aulas
+        </a>
+        <a mat-list-item routerLink="avaliacoes" routerLinkActive="active-link">
+          <mat-icon>star</mat-icon> Avaliações Recebidas
+        </a>
+        <a mat-list-item routerLink="relatorios" routerLinkActive="active-link">
+          <mat-icon>assessment</mat-icon> Relatórios
+        </a>
+      </ng-container>
+
+      <!-- (Links de Aluno) -->
+      <ng-container *ngIf="userRole === 'ROLE_ALUNO'">
+        <mat-divider></mat-divider>
+        <a mat-list-item routerLink="solicitacoes" routerLinkActive="active-link">
+          <mat-icon>inbox</mat-icon> Minhas Solicitações
+        </a>
+      </ng-container>
+
+      <!-- (Links Comuns) -->
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="historico" routerLinkActive="active-link">
+        <mat-icon>history</mat-icon> Histórico de Aulas
+      </a>
+    </mat-nav-list>
+
+    <!-- Rodapé da Sidebar -->
+    <div class="sidebar-footer">
+      <a mat-list-item routerLink="/">
+        <mat-icon>exit_to_app</mat-icon> Voltar ao site
+      </a>
+    </div>
+
+  </mat-sidenav>
+
+  <!-- ========================
+       O CONTEÚDO DA PÁGINA
+  ========================= -->
+  <mat-sidenav-content>
+
+    <mat-toolbar class="painel-toolbar">
+
+      <button *ngIf="(isMobile$ | async)" mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+
+      <span>Painel de {{ userRole === 'ROLE_PROFESSOR' ? 'Instrutor' : 'Aluno' }}</span>
+
+    </mat-toolbar>
+
+    <!-- 4. O <main> agora é o wrapper do <router-outlet> -->
+    <main class="painel-content-area">
+      <router-outlet></router-outlet>
+    </main>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

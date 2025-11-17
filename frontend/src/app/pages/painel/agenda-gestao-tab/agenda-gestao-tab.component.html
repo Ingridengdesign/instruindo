@@ -1,0 +1,112 @@
+<div *ngIf="isLoadingAgenda" class="loading-container">
+  <mat-spinner diameter="50"></mat-spinner>
+  <p>A carregar agenda...</p>
+</div>
+
+<div class="gestao-agenda-container" *ngIf="!isLoadingAgenda">
+
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>Minha Disponibilidade Recorrente</mat-card-title>
+      <mat-card-subtitle>Defina os seus horários fixos de atendimento para cada dia da semana.</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="disponibilidadeForm" (ngSubmit)="onSaveDisponibilidade()">
+        <div formArrayName="dias" class="disponibilidade-list">
+
+          <div *ngFor="let dia of diasFormArray.controls; let i = index" [formGroupName]="i"
+            class="dia-disponibilidade-row">
+
+            <mat-slide-toggle formControlName="ativo">
+              {{ dia.value.nomeDia }}
+            </mat-slide-toggle>
+
+            <div class="horarios-inputs" *ngIf="dia.value.ativo">
+              <mat-form-field appearance="outline" class="input-hora">
+                <mat-label>Início</mat-label>
+                <input matInput type="time" formControlName="horaInicio">
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="input-hora">
+                <mat-label>Fim</mat-label>
+                <input matInput type="time" formControlName="horaFim">
+              </mat-form-field>
+            </div>
+          </div>
+
+        </div>
+
+        <mat-card-actions class="form-actions-right">
+          <button mat-raised-button color="primary" type="submit" [disabled]="isLoadingAgenda">
+            Salvar Disponibilidade
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>Meus Bloqueios</mat-card-title>
+      <mat-card-subtitle>Adicione bloqueios específicos (ex: férias, médico) que sobrescrevem a sua
+        disponibilidade.</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="bloqueioForm" (ngSubmit)="onCreateBloqueio()" class="bloqueio-form-container">
+
+        <mat-form-field appearance="outline" class="form-field-flex">
+          <mat-label>Data do Bloqueio</mat-label>
+          <input matInput type="date" formControlName="dataBloqueio">
+          <mat-error *ngIf="bloqueioForm.get('dataBloqueio')?.hasError('required')">Obrigatório.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input-hora">
+          <mat-label>Início</mat-label>
+          <input matInput type="time" formControlName="horaInicioBloqueio">
+          <mat-error *ngIf="bloqueioForm.get('horaInicioBloqueio')?.hasError('required')">Obrigatório.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="input-hora">
+          <mat-label>Fim</mat-label>
+          <input matInput type="time" formControlName="horaFimBloqueio">
+          <mat-error *ngIf="bloqueioForm.get('horaFimBloqueio')?.hasError('required')">Obrigatório.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field-flex">
+          <mat-label>Motivo (Opcional)</mat-label>
+          <input matInput formControlName="motivo" placeholder="Ex: Pausa para almoço">
+        </mat-form-field>
+
+        <button mat-raised-button color="accent" type="submit" [disabled]="bloqueioForm.invalid || isLoadingAgenda">
+          Adicionar Bloqueio
+        </button>
+      </form>
+
+      <mat-divider></mat-divider>
+
+      <h4>Bloqueios Futuros</h4>
+      <div class="bloqueio-list">
+        <div *ngIf="!isLoadingAgenda && bloqueios.length === 0" class="empty-state">
+          <p>Nenhum bloqueio futuro encontrado.</p>
+        </div>
+        <mat-list>
+          <mat-list-item *ngFor="let b of bloqueios">
+            <mat-icon matListItemIcon>block</mat-icon>
+            <span matListItemTitle>
+              {{ b.dataHoraInicio | date:'dd/MM/yyyy' }}
+              (das {{ b.dataHoraInicio | date:'HH:mm' }} até {{ b.dataHoraFim | date:'HH:mm' }})
+            </span>
+            <span matListItemLine>
+              Motivo: {{ b.motivo || 'Sem motivo' }}
+            </span>
+            <button mat-icon-button color="warn" (click)="onDeleteBloqueio(b.id)" [disabled]="isLoadingAgenda">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

@@ -1,0 +1,36 @@
+<h1>Minhas Avaliações</h1>
+<p class="page-subtitle">Este é o feed de todas as avaliações que você recebeu de seus alunos.</p>
+
+<div *ngIf="isLoading" class="loading-container">
+  <mat-spinner></mat-spinner>
+</div>
+
+<!-- O Card "Feed" -->
+<mat-card class="content-card" *ngIf="!isLoading">
+  <div class="reviews-list">
+
+    <!-- Loop sobre as avaliações -->
+    <div *ngFor="let avaliacao of avaliacoes" class="review-item">
+      <div class="review-avatar">
+        <span>{{ getInitials(avaliacao.nomeAluno) }}</span>
+      </div>
+      <div class="review-content">
+        <div class="review-header">
+          <span class="review-name">{{ avaliacao.nomeAluno }}</span>
+        </div>
+        <div class="review-stars">
+          <mat-icon>star</mat-icon>
+          <span>{{ avaliacao.nota | number:'1.1-1' }}</span>
+        </div>
+        <p class="review-comment">{{ avaliacao.comentario }}</p>
+      </div>
+    </div>
+
+    <!-- Estado Vazio -->
+    <div *ngIf="!avaliacoes || avaliacoes.length === 0" class="empty-review">
+      <mat-icon>rate_review</mat-icon>
+      <p>Você ainda não recebeu nenhuma avaliação.</p>
+    </div>
+
+  </div>
+</mat-card>

@@ -1,0 +1,95 @@
+
+
+
+$star-color: #ffb400; 
+$tag-bg: #f0f6ff; 
+$tag-text: #005ce6; 
+
+.professor-card {
+  display: flex;
+  flex-direction: column; 
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+}
+
+
+img[mat-card-image] {
+  width: 120px; 
+  height: 120px;
+  border-radius: 50%; 
+  object-fit: cover; 
+  margin: 24px auto 16px auto; 
+}
+
+
+mat-card-content {
+  padding: 0 16px 16px 16px !important; 
+  display: flex;
+  flex-direction: column;
+  gap: 12px; 
+}
+
+.card-nome {
+  font-size: 1.25rem; 
+  font-weight: 600;
+  margin: 0;
+}
+
+.card-tags {
+  .tag {
+    display: inline-block;
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+    background-color: $tag-bg;
+    color: $tag-text;
+    font-weight: 500;
+  }
+}
+
+.card-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  mat-icon {
+    color: $star-color;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  span {
+    font-weight: 500;
+  }
+}
+
+.card-price {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+
+  span {
+    font-size: 1.5rem; 
+    font-weight: 700;
+  }
+}
+
+
+mat-card-actions {
+  display: flex;
+  flex-direction: column;
+  padding: 16px !important; 
+  gap: 8px; 
+
+  button {
+    width: 100%; 
+  }
+}

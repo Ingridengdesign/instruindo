@@ -1,0 +1,57 @@
+<mat-card class="welcome-banner">
+  <h2>Olá, {{ userName }} 👋</h2>
+  <p *ngIf="userRole === 'ROLE_PROFESSOR'">Gerencie suas aulas e acompanhe seus alunos.</p>
+  <p *ngIf="userRole === 'ROLE_ALUNO'">Bem-vindo(a) ao seu painel. Pronto(a) para aprender?</p>
+</mat-card>
+
+<div *ngIf="isLoading && userRole === 'ROLE_PROFESSOR'" class="loading-container">
+  <mat-spinner diameter="50"></mat-spinner>
+  <p>Carregando estatísticas...</p>
+</div>
+
+<ng-container *ngIf="!isLoading && userRole === 'ROLE_PROFESSOR'">
+<div class="stats-grid">
+  <mat-card class="stat-card">
+    <div class="stat-info">
+      <span class="stat-title">Aulas solicitadas</span>
+      <span class="stat-value">{{ stats.solicitadas }}</span>
+    </div>
+    <div class="stat-icon-wrapper" style="background-color: #fff4d1;">
+      <mat-icon style="color: #b38b00;">library_books</mat-icon>
+    </div>
+  </mat-card>
+
+  <mat-card class="stat-card">
+    <div class="stat-info">
+      <span class="stat-title">Aulas concluídas</span>
+      <span class="stat-value">{{ stats.concluidas }}</span>
+    </div>
+    <div class="stat-icon-wrapper" style="background-color: #d1ffef;">
+      <mat-icon style="color: #008a55;">check_circle</mat-icon>
+    </div>
+  </mat-card>
+
+  <mat-card class="stat-card">
+    <div class="stat-info">
+      <span class="stat-title">Avaliações recebidas</span>
+      <span class="stat-value">{{ stats.avaliacoes }}</span>
+    </div>
+    <div class="stat-icon-wrapper" style="background-color: #e1d1ff;">
+      <mat-icon style="color: #5a189a;">star</mat-icon>
+    </div>
+  </mat-card>
+</div>
+
+<h3>Ações rápidas</h3>
+<div class="actions-grid">
+  <mat-card class="action-card" routerLink="../pedidos">
+    <h4>Ver novos pedidos</h4>
+    <p>Você tem {{ stats.novosPedidos }} novos pedidos de aula</p>
+  </mat-card>
+
+  <mat-card class="action-card" routerLink="../agenda">
+    <h4>Atualizar disponibilidade</h4>
+    <p>Gerencie seus horários disponíveis</p>
+  </mat-card>
+</div>
+</ng-container>

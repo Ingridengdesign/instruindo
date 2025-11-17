@@ -1,0 +1,101 @@
+<div *ngIf="isLoading" class="modal-loading">
+  <mat-spinner diameter="50"></mat-spinner>
+  <p>Carregando...</p>
+</div>
+
+<ng-container *ngIf="!isLoading && professor">
+
+  <h2 mat-dialog-title>Solicitar aula com {{ professor.nome }}</h2>
+
+  <form [formGroup]="solicitacaoForm" (ngSubmit)="enviarSolicitacao()">
+    <mat-dialog-content class="modal-form-content">
+
+      <p>Selecione a data e horário desejados para sua aula. O professor confirmará a disponibilidade.</p>
+
+      <div class="modal-summary-card">
+        <div class="summary-info">
+          <img [src]="professor.urlFoto || 'https://material.angular.io/assets/img/examples/shiba2.jpg'"
+            alt="Foto de {{professor.nome}}">
+          <div class="summary-details">
+            <span class="nome">{{ professor.nome }}</span>
+            <div class="meta">
+              <span><mat-icon>star</mat-icon> {{ professor.mediaAvaliacao | number:'1.1-1' }}</span>
+              <span>{{ professor.categorias?.[0]?.nome }}</span>
+              <span>R$ {{ professor.precoPorHora | number:'1.2-2' }}/h</span>
+            </div>
+          </div>
+        </div>
+        <a mat-stroked-button routerLink="/perfil-professor/{{professor.idProfessor}}" target="_blank"
+          rel="noopener noreferrer" type="button">
+          Ver perfil
+        </a>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Sobre qual matéria é a aula?</mat-label>
+        <mat-select formControlName="idCategoria">
+
+          <mat-option *ngFor="let cat of professorCategoriasParaSelect" [value]="cat.idCategoria">
+            {{ cat.nome }}
+          </mat-option>
+
+        </mat-select>
+        <mat-error *ngIf="solicitacaoForm.get('idCategoria')?.hasError('required')">
+          Escolha uma matéria.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Selecionar data</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dataSelecionada"
+          (dateChange)="onDataSelecionada($event)" readonly>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+
+        <mat-datepicker #picker [dateClass]="dateClass"></mat-datepicker>
+
+        <mat-error *ngIf="solicitacaoForm.get('dataSelecionada')?.hasError('required')">
+          Escolha uma data.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Selecionar horário</mat-label>
+        <mat-select formControlName="horarioSelecionado"
+          [disabled]="isLoadingHorarios || agendaDisponivel.length === 0">
+          <mat-option *ngIf="isLoadingHorarios" disabled>
+            <mat-spinner diameter="20"></mat-spinner> Buscando horários...
+          </mat-option>
+          <mat-option *ngIf="!isLoadingHorarios && agendaDisponivel.length === 0" disabled>
+            Nenhum horário disponível
+          </mat-option>
+          <mat-option *ngFor="let horario of agendaDisponivel" [value]="horario">
+            {{ horario }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="solicitacaoForm.get('horarioSelecionado')?.hasError('required')">
+          Escolha um horário.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mensagem para o professor (opcional)</mat-label>
+        <textarea matInput formControlName="detalhes"
+          placeholder="Conte um pouco sobre suas expectativas para a aula..."></textarea>
+      </mat-form-field>
+
+
+      <mat-checkbox formControlName="termos" color="primary">
+        Aceito os <a href="#">termos e condições</a> de agendamento e entendo que a confirmação depende do instrutor.
+      </mat-checkbox>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close type="button">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="solicitacaoForm.invalid">
+        Enviar Solicitação
+      </button>
+    </mat-dialog-actions>
+
+  </form>
+
+</ng-container>

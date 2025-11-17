@@ -1,0 +1,125 @@
+
+.background-white {
+  background-color: var(--white) !important;
+}
+
+.background-black {
+  background-color: var(--black) !important;
+}
+.background-main {
+  background-color: var(--main) !important;
+}
+
+.background-main-2 {
+  background-color: var(--main-2) !important;
+}
+
+.background-main-3 {
+  background-color: var(--main-3) !important;
+}
+
+.background-main-4 {
+  background-color: var(--main-4) !important;
+}
+
+.background-main-5 {
+  background-color: var(--main-5) !important;
+}
+.background-theme-light-1 {
+  background-color: var(--theme-light-1) !important;
+}
+
+.background-theme-light-2 {
+  background-color: var(--theme-light-2) !important;
+}
+
+.background-theme-light-3 {
+  background-color: var(--theme-light-3) !important;
+}
+
+.background-theme-light-4 {
+  background-color: var(--theme-light-4) !important;
+}
+
+.background-theme-light-5 {
+  background-color: var(--theme-light-5) !important;
+}
+.background-theme-dark-1 {
+  background-color: var(--theme-dark-1) !important;
+}
+
+.background-theme-dark-2 {
+  background-color: var(--theme-dark-2) !important;
+}
+
+.background-theme-dark-3 {
+  background-color: var(--theme-dark-3) !important;
+}
+
+.background-theme-dark-4 {
+  background-color: var(--theme-dark-4) !important;
+}
+
+.background-theme-dark-5 {
+  background-color: var(--theme-dark-5) !important;
+}
+
+.background-yellow-1 {
+  background-color: var(--yellow-1) !important;
+}
+
+.background-yellow-2 {
+  background-color: var(--yellow-2) !important;
+}
+
+.background-yellow-3 {
+  background-color: var(--yellow-3) !important;
+}
+
+.background-yellow-4 {
+  background-color: var(--yellow-4) !important;
+}
+
+.background-yellow-5 {
+  background-color: var(--yellow-5) !important;
+}
+
+.background-red-1 {
+  background-color: var(--red-1) !important;
+}
+
+.background-red-2 {
+  background-color: var(--red-2) !important;
+}
+
+.background-red-3 {
+  background-color: var(--red-3) !important;
+}
+
+.background-red-4 {
+  background-color: var(--red-4) !important;
+}
+
+.background-red-5 {
+  background-color: var(--red-5) !important;
+}
+
+.background-purple-1 {
+  background-color: var(--purple-1) !important;
+}
+
+.background-purple-2 {
+  background-color: var(--purple-2) !important;
+}
+
+.background-purple-3 {
+  background-color: var(--purple-3) !important;
+}
+
+.background-purple-4 {
+  background-color: var(--purple-4) !important;
+}
+
+.background-purple-5 {
+  background-color: var(--purple-5) !important;
+}

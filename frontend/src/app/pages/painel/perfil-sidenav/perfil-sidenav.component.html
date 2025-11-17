@@ -1,0 +1,88 @@
+<div class="info-page-container">
+
+  <mat-card class="info-card">
+    <mat-card-title>Minhas Informações</mat-card-title>
+    <mat-card-subtitle>Gerencie seus dados pessoais e de instrutor.</mat-card-subtitle>
+
+    <mat-card-content>
+      <form class="info-form" [formGroup]="perfilForm" (ngSubmit)="onSalvar()">
+
+        <div class="form-grid">
+
+          <div class="profile-pic-column">
+
+            <div class="profile-image-container" (click)="onUploadClick()">
+              <img [src]="getProfessorImageUrl()" alt="Imagem do Usuário" class="profile-image">
+              <mat-icon class="edit-icon">edit</mat-icon>
+              <button mat-icon-button color="warn" class="remove-button" type="button" *ngIf="perfilData?.fotoUrl"
+                (click)="onRemoveFoto()">
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+            </div>
+
+            <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/png, image/jpeg" style="display: none;">
+
+            <button mat-flat-button color="primary" type="button" (click)="onToggleEdit()" class="edit-button">
+              {{ perfilForm.disabled ? 'Editar Informações' : 'Salvar Alterações' }}
+            </button>
+            <button mat-button type="button" *ngIf="!perfilForm.disabled" (click)="onCancelEdit()">
+              Cancelar
+            </button>
+
+            <mat-divider style="width: 100%; margin: 16px 0;" *ngIf="perfilForm.disabled"></mat-divider>
+
+            <button mat-stroked-button color="warn" type="button" *ngIf="perfilForm.disabled" (click)="onDesativarPerfil()">
+              Desativar minha conta
+            </button>
+          </div>
+
+          <div class="form-fields-column">
+
+            <h4>Informações Básicas</h4>
+            <mat-form-field appearance="outline">
+              <mat-label>Nome</mat-label>
+              <input matInput formControlName="nome">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input matInput formControlName="email" readonly> </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Nova Senha (opcional)</mat-label>
+              <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="novaSenha">
+              <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+                <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </mat-form-field>
+
+            <ng-container *ngIf="userRole === 'ROLE_PROFESSOR'">
+              <hr>
+              <h4>Informações do Instrutor</h4>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Frase de Perfil (Summary)</mat-label>
+                <textarea matInput formControlName="profileStatement"></textarea>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Preço por Hora (R$)</mat-label>
+                <input matInput type="number" formControlName="precoPorHora">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Categorias</mat-label>
+                <mat-select formControlName="idCategorias" multiple>
+                  <mat-option *ngFor="let cat of listaCategorias" [value]="cat.idCategoria">
+                    {{ cat.nome }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

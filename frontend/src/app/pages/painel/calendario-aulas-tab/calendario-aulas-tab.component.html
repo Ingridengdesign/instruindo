@@ -1,0 +1,54 @@
+<!-- src/app/pages/painel/calendario-aulas-tab/calendario-aulas-tab.component.html -->
+
+<h1>Calendário de Aulas</h1>
+<p class="page-subtitle">Veja suas aulas confirmadas e gerencie seus agendamentos.</p>
+
+<div *ngIf="isLoadingAgenda" class="loading-container">
+  <mat-spinner diameter="50"></mat-spinner>
+  <p>A carregar calendário...</p>
+</div>
+
+<!-- 1. O Novo Layout de 2 Colunas (Grid) -->
+<div class="calendario-grid" *ngIf="!isLoadingAgenda">
+
+  <!-- Coluna 1: O Calendário -->
+  <mat-card class="calendar-wrapper-card">
+    <mat-card-content>
+      <app-calendar [dateClass]="dateClassAulas" (dataSelecionada)="onDiaSelecionado($event)">
+      </app-calendar>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Coluna 2: Os Detalhes do Dia -->
+  <mat-card class="details-wrapper-card">
+    <mat-card-header>
+      <mat-card-title>Aulas do Dia</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Estado 1: Nenhum dia selecionado -->
+      <div *ngIf="!aulasDoDiaSelecionado.length" class="empty-details">
+        <mat-icon>event</mat-icon>
+        <p>Selecione um dia no calendário para ver as aulas agendadas.</p>
+      </div>
+
+      <!-- Estado 2: Lista de aulas do dia -->
+      <div class="aulas-list">
+        <mat-card class="aula-card" *ngFor="let aula of aulasDoDiaSelecionado">
+          <div class="aula-info">
+            <span class="aula-nome">{{ aula.nomeAluno }}</span>
+            <span class="aula-horario">
+              <mat-icon>schedule</mat-icon>
+              {{ aula.dataHoraAula | date:'HH:mm' }}
+            </span>
+          </div>
+          <button mat-flat-button color="warn" class="cancel-button" (click)="onCancelarAula(aula.idAgendamento)">
+            <mat-icon>cancel</mat-icon> Cancelar
+          </button>
+        </mat-card>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

@@ -1,0 +1,90 @@
+<app-header></app-header>
+
+<main class="home-page">
+
+  <section class="section-hero">
+    <div class="container">
+      <div>
+        <h1>Encontre seu Instrutor Ideal</h1>
+        <p>Instruindo é uma plataforma que conecta para simplificar quem busca aulas particulares, facilitando
+          quem busca ensinar e para quem busca aprender.</p>
+        <button mat-flat-button color="primary">Buscar instrutores</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-features">
+    <div class="container">
+
+      <div class="split-section feature-layout">
+        <div class="split-content">
+          <h2>PARA ALUNOS</h2>
+          <p>Aprenda um novo assunto, reforce seus estudos, prepare-se para sua prova; seja qual for seu objetivo,
+            busque aqui um professor para suas necessidades.</p>
+        </div>
+        <div class="split-content">
+          <img src="./../../../assets/img/online-class.png" alt="Alunos aprendendo">
+        </div>
+      </div>
+
+      <div class="split-section feature-layout reverse-on-desktop">
+        <div class="split-content">
+          <h2>PARA PROFESSORES</h2>
+          <p>Faça sua própria agenda, centralize seus compromissos, tenha uma renda extra com aulas particulares.</p>
+        </div>
+        <div class="split-content">
+          <img src="./../../../assets/img/math-class.png" alt="Professor ensinando">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section-categories">
+    <div class="container">
+      <h2>Matérias mais buscadas</h2>
+      <div class="categories-grid">
+        <mat-card class="category-card" *ngFor="let materia of materias">
+          <div class="icon-wrapper">
+            <mat-icon>{{ getIconForMateria(materia) }}</mat-icon>
+          </div>
+          <span>{{ materia }}</span>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-how-it-works">
+    <div class="container">
+      <h2>Como funciona</h2>
+      <p>Encontre o professor ideal em 3 passos simples.</p>
+
+      <div class="how-it-works-grid">
+        <mat-card class="how-it-works-card">
+          <div class="icon-wrapper" style="background-color: #cce0ff;">
+            <mat-icon style="color: #005ce6;">search</mat-icon>
+          </div>
+          <h3>1. Busque</h3>
+          <p>Filtre por matéria, preço e disponibilidade de horário.</p>
+        </mat-card>
+        <mat-card class="how-it-works-card">
+          <div class="icon-wrapper" style="background-color: #d1ffef;">
+            <mat-icon style="color: #008a55;">calendar_today</mat-icon>
+          </div>
+          <h3>2. Agende</h3>
+          <p>Escolha o melhor horário e envie uma solicitação de aula.</p>
+        </mat-card>
+        <mat-card class="how-it-works-card">
+          <div class="icon-wrapper" style="background-color: #e1d1ff;">
+            <mat-icon style="color: #5a189a;">school</mat-icon>
+          </div>
+          <h3>3. Aprenda</h3>
+          <p>Conecte-se com seu instrutor e comece a aprender!</p>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<app-footer></app-footer>

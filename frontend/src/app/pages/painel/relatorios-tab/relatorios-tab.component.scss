@@ -1,0 +1,101 @@
+
+
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.page-subtitle {
+  font-size: 1.1rem;
+  color: #5a6a85;
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+
+.form-card {
+  padding: 16px 24px 24px 24px;
+}
+
+
+.relatorio-form {
+  display: flex;
+  flex-wrap: wrap; 
+  align-items: flex-start;
+  gap: 16px;
+}
+
+
+mat-form-field {
+  flex: 1;
+  min-width: 200px; 
+}
+
+
+.relatorio-actions {
+  display: flex;
+  gap: 8px;
+  
+  padding-top: 8px;
+
+  button {
+    height: 48px;
+    font-weight: 500;
+  }
+}
+
+
+.results-card {
+  margin-top: 24px;
+  padding: 24px;
+}
+
+.results-content {
+  .stat-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    padding: 16px 0;
+    border-bottom: 1px solid #eee;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .stat-label {
+    color: #5a6a85;
+  }
+
+  .stat-value {
+    font-weight: 600;
+    color: #212529;
+  }
+}
+
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #777;
+
+  mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: #ccc;
+    margin-bottom: 16px;
+  }
+
+  p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  span {
+    font-size: 1rem;
+  }
+}

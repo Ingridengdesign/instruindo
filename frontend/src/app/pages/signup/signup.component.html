@@ -1,0 +1,93 @@
+<app-header></app-header>
+
+<div class="auth-page-container">
+  <mat-card class="auth-card">
+    <mat-card-title>Criar sua conta</mat-card-title>
+    <mat-card-subtitle>Junte-se à nossa comunidade de aprendizado</mat-card-subtitle>
+
+    <mat-card-content>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+        <div *ngIf="mensagemErro" class="auth-error">
+          <p>{{ mensagemErro }}</p>
+        </div>
+
+        <mat-button-toggle-group formControlName="role" class="role-toggle">
+          <mat-button-toggle value="ALUNO">Sou Aluno</mat-button-toggle>
+          <mat-button-toggle value="PROFESSOR">Sou Professor</mat-button-toggle>
+        </mat-button-toggle-group>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nome completo</mat-label>
+          <input matInput formControlName="nome">
+          <mat-error *ngIf="signupForm.get('nome')?.hasError('required')">O nome é obrigatório.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email">
+          <mat-error *ngIf="signupForm.get('email')?.touched">
+            {{ getErrorMessage() }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input matInput formControlName="senha" [type]="hide ? 'password' : 'text'" placeholder="Mínimo 6 caracteres">
+          <button mat-icon-button matSuffix (click)="hide = !hide" type="button">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="signupForm.get('senha')?.hasError('required')">A senha é obrigatória.</mat-error>
+          <mat-error *ngIf="signupForm.get('senha')?.hasError('minlength')">Mínimo 6 caracteres.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Confirmar senha</mat-label>
+          <input matInput formControlName="confirmarSenha" [type]="hide ? 'password' : 'text'">
+          <mat-error *ngIf="signupForm.get('confirmarSenha')?.hasError('required')">A confirmação é
+            obrigatória.</mat-error>
+          <mat-error *ngIf="signupForm.hasError('passwordMismatch') && signupForm.get('confirmarSenha')?.touched">
+            As senhas não coincidem.
+          </mat-error>
+        </mat-form-field>
+
+        <ng-container *ngIf="signupForm.get('role')?.value === 'PROFESSOR'">
+          <hr>
+          <p class="form-subtitle">Informações do Professor</p>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Preço por Hora (R$)</mat-label>
+            <input matInput type="number" formControlName="precoPorHora" placeholder="Ex: 100.50">
+            <mat-error *ngIf="signupForm.get('precoPorHora')?.hasError('required')">O preço é obrigatório.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Categorias (pode selecionar várias)</mat-label>
+            <mat-select formControlName="idCategorias" multiple>
+              <mat-option *ngFor="let cat of listaCategorias" [value]="cat.idCategoria">
+                {{ cat.nome }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="signupForm.get('idCategorias')?.hasError('required')">Selecione ao menos uma
+              categoria.</mat-error>
+          </mat-form-field>
+        </ng-container>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid || isLoading"
+          class="auth-button">
+          <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+          <span *ngIf="!isLoading">Criar conta</span>
+        </button>
+
+      </form>
+    </mat-card-content>
+
+    <mat-card-actions class="auth-actions">
+      <span>Já tem uma conta?</span>
+      <a mat-button routerLink="/login">Fazer login</a>
+    </mat-card-actions>
+
+  </mat-card>
+</div>
+
+<app-footer></app-footer>
